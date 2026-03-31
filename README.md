@@ -1,6 +1,9 @@
 # E1-1 개발 워크스테이션 구축
 
 ## 1. 프로젝트 개요
+
+리눅스 CLI, Docker, Git/GitHub를 활용하여 재현 가능한 개발 워크스테이션을 구축하는 프로젝트이다. 터미널 기본 조작과 파일 권한 관리를 실습하고, Docker로 커스텀 웹 서버 컨테이너를 제작하여 포트 매핑, 바인드 마운트, 볼륨 영속성을 검증한다. 모든 수행 과정은 이 문서에 명령어와 출력 결과로 기록하며, Git으로 버전 관리하고 GitHub에 공개한다.
+
 ## 2. 실행 환경
 
 ```bash
@@ -33,6 +36,20 @@ Docker version 28.2.2, build 28.2.2-0ubuntu1~24.04.1
 ```
 
 ## 3. 수행 항목 체크리스트
+
+- [x] 터미널 기본 조작 및 폴더 구성
+- [x] 권한 변경 실습 (파일 1개 + 디렉토리 1개)
+- [x] Docker 설치/점검 (version, info)
+- [x] hello-world 실행
+- [x] ubuntu 컨테이너 실행 및 내부 명령
+- [x] attach/exec 차이 정리
+- [x] Dockerfile 커스텀 이미지 빌드/실행
+- [x] 포트 매핑 접속 (2회: 8080, 8081)
+- [x] 바인드 마운트 변경 반영
+- [x] 볼륨 영속성 검증
+- [x] Git 설정 + GitHub 연동
+- [x] 보안 검토 (민감정보 마스킹)
+
 ## 4. 터미널 조작 로그
 
 ```bash
@@ -602,7 +619,7 @@ The key fingerprint is:
 SHA256:oAKk1kPhHsVFAA7FyPT5e20x+74x/jcYV3Fx5VyAK8Y nansu0425@gmail.com
 
 $ cat ~/.ssh/id_ed25519.pub
-ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICfkXP201tQWcUnQA6DviZRSCEYHM9qd2ZnrdB9Y0zZ3 nansu0425@gmail.com
+ssh-ed25519 AAAA****<마스킹> nansu0425@gmail.com
 
 $ ssh -T git@github.com
 Hi nansu0425! You've successfully authenticated, but GitHub does not provide shell access.
