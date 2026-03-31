@@ -64,4 +64,34 @@ branch.main.merge=refs/heads/main
 
 ![VSCode GitHub 연동](screenshots/VSCode-Github-연동.png)
 
+### GitHub SSH 키 설정 (보너스)
+
+```bash
+$ ssh-keygen -t ed25519 -C "nansu0425@gmail.com"
+Generating public/private ed25519 key pair.
+Enter file in which to save the key (/home/nansu0425/.ssh/id_ed25519):
+Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
+Your identification has been saved in /home/nansu0425/.ssh/id_ed25519
+Your public key has been saved in /home/nansu0425/.ssh/id_ed25519.pub
+The key fingerprint is:
+SHA256:oAKk1kPhHsVFAA7FyPT5e20x+74x/jcYV3Fx5VyAK8Y nansu0425@gmail.com
+
+$ cat ~/.ssh/id_ed25519.pub
+ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICfkXP201tQWcUnQA6DviZRSCEYHM9qd2ZnrdB9Y0zZ3 nansu0425@gmail.com
+
+$ ssh -T git@github.com
+Hi nansu0425! You've successfully authenticated, but GitHub does not provide shell access.
+
+$ git remote set-url origin git@github.com:nansu0425/E1-1.git
+
+$ git remote -v
+origin	git@github.com:nansu0425/E1-1.git (fetch)
+origin	git@github.com:nansu0425/E1-1.git (push)
+
+$ git push origin main
+To github.com:nansu0425/E1-1.git
+   5010658..df4841f  main -> main
+```
+
 ## 13. 트러블슈팅
