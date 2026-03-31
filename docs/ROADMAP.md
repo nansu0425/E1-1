@@ -461,11 +461,11 @@ git commit -m "Phase 3: Docker 설치 점검 및 컨테이너 실습 기록"
 
 ### 작업 목록
 
-- [ ] 정적 HTML 파일 작성 (`app/index.html`)
-- [ ] Dockerfile 작성 (nginx:alpine 기반)
-- [ ] 이미지 빌드
-- [ ] 컨테이너 실행 및 동작 확인
-- [ ] README에 베이스 이미지 선택 이유, 커스텀 포인트, 빌드/실행 결과 기록
+- [x] 정적 HTML 파일 작성 (`app/index.html`)
+- [x] Dockerfile 작성 (nginx:alpine 기반)
+- [x] 이미지 빌드
+- [x] 컨테이너 실행 및 동작 확인
+- [x] README에 베이스 이미지 선택 이유, 커스텀 포인트, 빌드/실행 결과 기록
 - [ ] 커밋
 
 ### 실행 명령어

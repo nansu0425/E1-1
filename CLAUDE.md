@@ -16,7 +16,7 @@
 | Phase 1: 터미널 기본 조작 | ✅ 완료 |
 | Phase 2: 파일 권한 실습 | ✅ 완료 |
 | Phase 3: Docker 설치 및 기본 점검 | ✅ 완료 |
-| Phase 4: Dockerfile 커스텀 이미지 제작 | ⬜ 미완료 |
+| Phase 4: Dockerfile 커스텀 이미지 제작 | ✅ 완료 |
 | Phase 5: 포트 매핑 및 스토리지 | ⬜ 미완료 |
 | Phase 6: 문서 마무리 및 보안 검토 | ⬜ 미완료 |
 | Phase 7: 보너스 (SSH 키 설정) | ✅ 완료 |
