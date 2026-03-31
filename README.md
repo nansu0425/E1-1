@@ -49,6 +49,9 @@ Docker version 28.2.2, build 28.2.2-0ubuntu1~24.04.1
 - [x] 볼륨 영속성 검증
 - [x] Git 설정 + GitHub 연동
 - [x] 보안 검토 (민감정보 마스킹)
+- [x] (보너스) Docker Compose 멀티 컨테이너 (nginx + Flask + Redis)
+- [x] (보너스) 환경 변수 활용 (FLASK_DEBUG, REDIS_HOST)
+- [x] (보너스) GitHub SSH 키 설정
 
 ## 4. 검증 방법 및 결과 위치
 
@@ -69,5 +72,29 @@ Docker version 28.2.2, build 28.2.2-0ubuntu1~24.04.1
 | 볼륨 영속성 | [포트 매핑 및 스토리지](docs/port-mapping-and-storage.md#볼륨-영속성) | 컨테이너 삭제 후 새 컨테이너에서 데이터 읽기 |
 | Git 설정 + GitHub 연동 | [Git 설정 및 GitHub 연동](docs/git-setup.md) | git config --list + SSH 인증 |
 | 보안 검토 | 전체 문서 | 민감정보 마스킹 확인 |
+| Docker Compose 멀티 컨테이너 | [Docker Compose 실습](docs/docker-compose.md) | 3서비스 실행 + wget 응답 확인 |
+| 환경 변수 활용 | [Docker Compose 실습](docs/docker-compose.md#4-환경-변수-활용) | FLASK_DEBUG 변경 전/후 비교 |
+| GitHub SSH 키 설정 | [Git 설정 및 GitHub 연동](docs/git-setup.md#ssh-키-설정) | SSH 인증 테스트 |
 
 ## 5. 트러블슈팅
+
+### 트러블슈팅 #1: `docker compose` 명령 인식 실패
+
+**문제:** Phase 7에서 `docker compose up` 실행 시 `unknown command` 오류 발생
+
+```bash
+$ docker compose version
+docker: unknown command: docker compose
+```
+
+**원인 가설:** Docker Engine은 설치되어 있지만, Compose V2 플러그인이 별도 패키지로 분리되어 있어 추가 설치가 필요할 것으로 추정
+
+**확인:** `docker help` 출력에서 `compose` 서브커맨드가 목록에 없음을 확인
+
+**해결:** `docker-compose-v2` 패키지를 설치하여 해결
+
+```bash
+$ sudo apt-get install -y docker-compose-v2
+$ docker compose version
+Docker Compose version v2.34.0
+```

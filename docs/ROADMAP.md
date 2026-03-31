@@ -766,8 +766,8 @@ git push origin main
 
 **완료 기준:**
 
-- [ ] `docker-compose.yml`로 단일 웹 서비스 실행/종료 성공
-- [ ] `up`, `down`, `ps`, `logs` 명령어 수행 결과 기록
+- [x] `docker-compose.yml`로 단일 웹 서비스 실행/종료 성공
+- [x] `up`, `down`, `ps`, `logs` 명령어 수행 결과 기록
 
 ### 7-2. Flask API 서비스 작성
 
@@ -775,9 +775,9 @@ git push origin main
 
 **완료 기준:**
 
-- [ ] `api/` 디렉토리에 Flask 앱, 의존성 파일, Dockerfile 작성
-- [ ] `GET /api/visits` 엔드포인트 구현 — Redis 카운터를 증가시키고 JSON 응답
-- [ ] 이미지 빌드 성공
+- [x] `api/` 디렉토리에 Flask 앱, 의존성 파일, Dockerfile 작성
+- [x] `GET /api/visits` 엔드포인트 구현 — Redis 카운터를 증가시키고 JSON 응답
+- [x] 이미지 빌드 성공
 
 ### 7-3. 멀티 컨테이너 구성 (3서비스)
 
@@ -787,10 +787,10 @@ git push origin main
 
 **완료 기준:**
 
-- [ ] nginx가 `/api/` 요청을 Flask로 프록시하는 설정 작성
-- [ ] `curl http://localhost:8080` → 정적 페이지 응답
-- [ ] `curl http://localhost:8080/api/visits` → JSON 카운터 응답
-- [ ] `app/index.html`에서 방문 카운터 표시 (fetch `/api/visits`)
+- [x] nginx가 `/api/` 요청을 Flask로 프록시하는 설정 작성
+- [x] `curl http://localhost:8080` → 정적 페이지 응답
+- [x] `curl http://localhost:8080/api/visits` → JSON 카운터 응답
+- [x] `app/index.html`에서 방문 카운터 표시 (fetch `/api/visits`)
 
 ### 7-4. 환경 변수 활용
 
@@ -800,8 +800,8 @@ git push origin main
 
 **완료 기준:**
 
-- [ ] Compose에서 환경 변수 주입 (FLASK_DEBUG, REDIS_HOST 등)
-- [ ] 환경 변수 변경 → 동작 변화 확인 및 기록
+- [x] Compose에서 환경 변수 주입 (FLASK_DEBUG, REDIS_HOST 등)
+- [x] 환경 변수 변경 → 동작 변화 확인 및 기록
 
 ### 7-5. GitHub SSH 키 설정 (✅ 완료)
 

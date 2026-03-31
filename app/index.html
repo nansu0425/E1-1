@@ -7,5 +7,19 @@
 <body>
     <h1>Hello, Codyssey!</h1>
     <p>이 페이지는 커스텀 Docker 이미지로 서빙됩니다.</p>
+    <hr>
+    <h2>방문 카운터</h2>
+    <p>총 방문 횟수: <strong id="count">로딩 중...</strong></p>
+
+    <script>
+        fetch('/api/visits')
+            .then(res => res.json())
+            .then(data => {
+                document.getElementById('count').textContent = data.visits + '회';
+            })
+            .catch(() => {
+                document.getElementById('count').textContent = '연결 실패';
+            });
+    </script>
 </body>
 </html>
