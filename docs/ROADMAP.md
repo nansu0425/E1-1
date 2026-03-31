@@ -746,108 +746,80 @@ git push origin main
 
 ## Phase 7: 보너스 과제 (선택)
 
-> **목표:** Docker Compose, 환경 변수, SSH 키 등 추가 학습을 수행한다.
+> **목표:** Docker Compose로 멀티 컨테이너 환경을 구성하고, 환경 변수를 활용한다.
 >
 > **대응 요구사항:** MISSION.md §5 (보너스 과제)
+>
+> **아키텍처:** nginx (reverse proxy) + Flask API + Redis 3서비스 구성
+>
+> ```
+> [브라우저] → :8080 → [nginx] → /api/ → [Flask] → [Redis]
+>                         ↓
+>                    / → 정적 HTML
+> ```
 
-### 7-1. Docker Compose 기초
+### 7-1. Docker Compose 기초 (단일 서비스)
 
-- [ ] `docker-compose.yml` 작성 (단일 서비스)
-- [ ] `docker compose up -d`로 실행
-- [ ] `docker compose ps`, `docker compose logs`로 상태/로그 확인
-- [ ] `docker compose down`으로 종료
+> **목표:** 기존 my-web:1.0을 Compose로 실행하고, 운영 명령어를 습득한다.
+>
+> **대응 요구사항:** Docker Compose 기초, Compose 운영 명령어 습득
 
-```yaml
-# docker-compose.yml
-version: "3.8"
+**완료 기준:**
 
-services:
-  web:
-    build: .
-    ports:
-      - "8080:80"
-```
+- [ ] `docker-compose.yml`로 단일 웹 서비스 실행/종료 성공
+- [ ] `up`, `down`, `ps`, `logs` 명령어 수행 결과 기록
 
-```bash
-docker compose up -d
-docker compose ps
-docker compose logs
-docker compose down
-```
+### 7-2. Flask API 서비스 작성
 
-### 7-2. Docker Compose 멀티 컨테이너
+> **목표:** Redis를 사용하는 Flask API 서비스를 만들고 이미지를 빌드한다.
 
-- [ ] 웹 서버 + 보조 서비스(예: Redis) 구성
-- [ ] 컨테이너 간 네트워크 통신 확인
+**완료 기준:**
 
-```yaml
-# docker-compose.yml (멀티 컨테이너 예시)
-version: "3.8"
+- [ ] `api/` 디렉토리에 Flask 앱, 의존성 파일, Dockerfile 작성
+- [ ] `GET /api/visits` 엔드포인트 구현 — Redis 카운터를 증가시키고 JSON 응답
+- [ ] 이미지 빌드 성공
 
-services:
-  web:
-    build: .
-    ports:
-      - "8080:80"
-    depends_on:
-      - redis
+### 7-3. 멀티 컨테이너 구성 (3서비스)
 
-  redis:
-    image: redis:alpine
-    ports:
-      - "6379:6379"
-```
+> **목표:** nginx + Flask + Redis를 Compose로 함께 실행하고, 컨테이너 간 통신을 확인한다.
+>
+> **대응 요구사항:** Docker Compose 멀티 컨테이너
 
-```bash
-docker compose up -d
-# 웹 컨테이너에서 Redis 연결 확인
-docker compose exec web ping redis
-docker compose down
-```
+**완료 기준:**
 
-### 7-3. 환경 변수 활용
+- [ ] nginx가 `/api/` 요청을 Flask로 프록시하는 설정 작성
+- [ ] `curl http://localhost:8080` → 정적 페이지 응답
+- [ ] `curl http://localhost:8080/api/visits` → JSON 카운터 응답
+- [ ] `app/index.html`에서 방문 카운터 표시 (fetch `/api/visits`)
 
-- [ ] Dockerfile 또는 Compose에서 환경 변수 주입
-- [ ] 환경 변수에 따라 동작이 달라지는 것을 확인
+### 7-4. 환경 변수 활용
 
-```bash
-# 환경 변수를 주입하여 실행
-docker run -d -p 8080:80 -e APP_ENV=production --name env-test my-web:1.0
+> **목표:** 환경 변수로 Flask 설정을 제어하고, 동작 차이를 확인한다.
+>
+> **대응 요구사항:** 환경 변수 활용
 
-# 컨테이너 내부에서 환경 변수 확인
-docker exec env-test env | grep APP_ENV
-```
+**완료 기준:**
 
-### 7-4. GitHub SSH 키 설정
+- [ ] Compose에서 환경 변수 주입 (FLASK_DEBUG, REDIS_HOST 등)
+- [ ] 환경 변수 변경 → 동작 변화 확인 및 기록
 
-- [ ] SSH 키 생성
-- [ ] GitHub에 공개키 등록
-- [ ] SSH로 push 동작 확인
+### 7-5. GitHub SSH 키 설정 (✅ 완료)
 
-```bash
-# SSH 키 생성
-ssh-keygen -t ed25519 -C "본인 이메일"
+- `docs/git-setup.md` 참조
 
-# 공개키 확인 (이 내용을 GitHub > Settings > SSH keys에 등록)
-cat ~/.ssh/id_ed25519.pub
+### 기록할 증거
 
-# SSH 연결 테스트
-ssh -T git@github.com
-
-# 리모트를 SSH로 변경
-git remote set-url origin git@github.com:<username>/<repo>.git
-
-# 푸시 테스트
-git push origin main
-```
+| 증거 | 기록 위치 |
+|------|-----------|
+| Compose 단일 서비스 실행/종료 로그 | `docs/docker-compose.md` |
+| Flask API Dockerfile 및 빌드 결과 | `docs/docker-compose.md` |
+| 3서비스 실행 + curl 응답 결과 | `docs/docker-compose.md` |
+| 환경 변수 변경 전/후 동작 비교 | `docs/docker-compose.md` |
+| 트러블슈팅 (발생 시) | README §5 |
 
 ### 커밋 체크포인트
 
-```bash
-git add .
-git commit -m "Phase 7: 보너스 과제 수행"
-git push origin main
-```
+Phase 7 완료 후 커밋 및 푸시한다.
 
 ---
 

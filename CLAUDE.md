@@ -19,7 +19,7 @@
 | Phase 4: Dockerfile 커스텀 이미지 제작 | ✅ 완료 |
 | Phase 5: 포트 매핑 및 스토리지 | ✅ 완료 |
 | Phase 6: 문서 마무리 및 보안 검토 | ⬜ 미완료 |
-| Phase 7: 보너스 (SSH 키 설정) | ✅ 완료 |
+| Phase 7: 보너스 (Docker Compose, 환경 변수, SSH 키) | ⬜ 미완료 (SSH 키만 완료) |
 
 ---
 
@@ -46,6 +46,7 @@
 | Phase 4 | `docs/docker-custom-image.md` |
 | Phase 5 | `docs/port-mapping-and-storage.md` |
 | Phase 7 (보너스) | `docs/git-setup.md` SSH 키 설정 |
+| Phase 7 (보너스) | `docs/docker-compose.md` Docker Compose 멀티 컨테이너 실습 |
 | Phase 1~5 (수시) | README §5. 트러블슈팅 — **문제 발생 시 즉시 기록** (Phase 6까지 미루지 않는다) |
 | Phase 6 | README §1, §3, §4, §5 |
 
@@ -56,7 +57,13 @@
 ```
 E1-1/
 ├── app/index.html                       # Phase 4에서 생성
+├── api/                                  # Phase 7에서 생성 (Flask API)
+│   ├── app.py
+│   ├── requirements.txt
+│   └── Dockerfile
 ├── Dockerfile                            # Phase 4에서 생성
+├── docker-compose.yml                    # Phase 7에서 생성
+├── nginx.conf                            # Phase 7에서 생성 (reverse proxy)
 ├── README.md                             # 개요, 환경, 체크리스트, 링크 허브
 ├── screenshots/                          # 스크린샷 증거
 ├── docs/
@@ -66,7 +73,8 @@ E1-1/
 │   ├── docker-basics.md                  # Phase 3 Docker 기초
 │   ├── docker-custom-image.md            # Phase 4 커스텀 이미지
 │   ├── port-mapping-and-storage.md       # Phase 5 포트/스토리지
-│   └── git-setup.md                      # Git 설정 및 GitHub 연동
+│   ├── git-setup.md                      # Git 설정 및 GitHub 연동
+│   └── docker-compose.md                 # Phase 7 Docker Compose 실습
 ├── .gitignore
 └── CLAUDE.md
 ```
@@ -121,6 +129,13 @@ E1-1/
 - 바인드 마운트: curl 변경 전/후 비교 기록, 원본 복원 잊지 않기
 - 볼륨: 생성 → 쓰기 → 컨테이너 삭제 → 새 컨테이너에서 읽기 패턴
 - 오류/예상과 다른 동작 발생 시 README §5에 즉시 기록
+
+### Phase 7: 보너스 (Docker Compose, 환경 변수)
+- nginx reverse proxy + Flask API + Redis 3서비스 구성
+- 구현 방법은 ROADMAP에 기술하지 않음 — 직접 시도하며 트러블슈팅 경험
+- 트러블슈팅 발생 시 README §5에 즉시 기록
+- 결과를 `docs/docker-compose.md`에 기록
+- 실습 완료 후 `docker compose down`으로 정리
 
 ### Phase 6: 문서 마무리 및 보안 검토
 - README §1 프로젝트 개요 확인
