@@ -35,6 +35,14 @@ $ docker --version
 Docker version 28.2.2, build 28.2.2-0ubuntu1~24.04.1
 ```
 
+### macOS 사용자 참고
+
+본 프로젝트는 Ubuntu 환경에서 수행되었으나, 대부분의 명령어는 macOS에서도 동일하게 실행할 수 있다. 주요 차이점은 다음과 같다.
+
+- **wget → curl 대체:** macOS에는 `wget`이 기본 설치되어 있지 않으므로 `wget -qO- <URL>` 대신 `curl -s <URL>`을 사용한다.
+- **Docker Desktop:** macOS에서는 Docker Desktop 설치 시 `docker compose`가 자동 포함된다. 별도로 `docker-compose-v2` 패키지를 설치할 필요가 없다.
+- **홈 디렉토리 경로:** `/home/<user>` 대신 `/Users/<user>`를 사용한다.
+
 ## 3. 수행 항목 체크리스트
 
 - [x] 터미널 기본 조작 및 폴더 구성
@@ -74,7 +82,7 @@ Docker version 28.2.2, build 28.2.2-0ubuntu1~24.04.1
 | 보안 검토 | 전체 문서 | 민감정보 마스킹 확인 |
 | Docker Compose 멀티 컨테이너 | [Docker Compose 실습](docs/docker-compose.md) | 3서비스 실행 + wget 응답 확인 |
 | 환경 변수 활용 | [Docker Compose 실습](docs/docker-compose.md#4-환경-변수-활용) | FLASK_DEBUG 변경 전/후 비교 |
-| GitHub SSH 키 설정 | [Git 설정 및 GitHub 연동](docs/git-setup.md#ssh-키-설정) | SSH 인증 테스트 |
+| GitHub SSH 키 설정 | [Git 설정 및 GitHub 연동](docs/git-setup.md#github-ssh-키-설정-보너스) | SSH 인증 테스트 |
 
 ## 5. 트러블슈팅
 

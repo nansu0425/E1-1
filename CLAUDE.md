@@ -18,7 +18,7 @@
 | Phase 3: Docker 설치 및 기본 점검 | ✅ 완료 |
 | Phase 4: Dockerfile 커스텀 이미지 제작 | ✅ 완료 |
 | Phase 5: 포트 매핑 및 스토리지 | ✅ 완료 |
-| Phase 6: 문서 마무리 및 보안 검토 | ⬜ 미완료 |
+| Phase 6: 문서 마무리 및 보안 검토 | ✅ 완료 |
 | Phase 7: 보너스 (Docker Compose, 환경 변수, SSH 키) | ✅ 완료 |
 
 ---
