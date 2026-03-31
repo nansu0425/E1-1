@@ -78,23 +78,9 @@ Docker version 28.2.2, build 28.2.2-0ubuntu1~24.04.1
 
 ## 5. 트러블슈팅
 
-### 트러블슈팅 #1: `docker compose` 명령 인식 실패
+실습 중 발생한 문제와 해결 과정을 기록했다. 상세 내용은 [트러블슈팅 문서](docs/troubleshooting.md)에서 확인할 수 있다.
 
-**문제:** Phase 7에서 `docker compose up` 실행 시 `unknown command` 오류 발생
-
-```bash
-$ docker compose version
-docker: unknown command: docker compose
-```
-
-**원인 가설:** Docker Engine은 설치되어 있지만, Compose V2 플러그인이 별도 패키지로 분리되어 있어 추가 설치가 필요할 것으로 추정
-
-**확인:** `docker help` 출력에서 `compose` 서브커맨드가 목록에 없음을 확인
-
-**해결:** `docker-compose-v2` 패키지를 설치하여 해결
-
-```bash
-$ sudo apt-get install -y docker-compose-v2
-$ docker compose version
-Docker Compose version v2.34.0
-```
+| # | 문제 | 원인 | 해결 |
+|---|---|---|---|
+| 1 | `docker compose` 명령 인식 실패 | Compose V2 플러그인 미설치 | `docker-compose-v2` 패키지 설치 |
+| 2 | 바인드 마운트 중 `!`가 `\!`로 저장 | 셸이 `!`를 이스케이프 처리 | heredoc(`cat <<'EOF'`)으로 파일 작성 |

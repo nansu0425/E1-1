@@ -47,7 +47,7 @@
 | Phase 5 | `docs/port-mapping-and-storage.md` |
 | Phase 7 (보너스) | `docs/git-setup.md` SSH 키 설정 |
 | Phase 7 (보너스) | `docs/docker-compose.md` Docker Compose 멀티 컨테이너 실습 |
-| Phase 1~5 (수시) | README §5. 트러블슈팅 — **문제 발생 시 즉시 기록** (Phase 6까지 미루지 않는다) |
+| Phase 1~5 (수시) | `docs/troubleshooting.md` — **문제 발생 시 즉시 기록** (Phase 6까지 미루지 않는다) |
 | Phase 6 | README §1, §3, §4, §5 |
 
 ---
@@ -74,7 +74,8 @@ E1-1/
 │   ├── docker-custom-image.md            # Phase 4 커스텀 이미지
 │   ├── port-mapping-and-storage.md       # Phase 5 포트/스토리지
 │   ├── git-setup.md                      # Git 설정 및 GitHub 연동
-│   └── docker-compose.md                 # Phase 7 Docker Compose 실습
+│   ├── docker-compose.md                 # Phase 7 Docker Compose 실습
+│   └── troubleshooting.md                # 트러블슈팅
 ├── .gitignore
 └── CLAUDE.md
 ```
