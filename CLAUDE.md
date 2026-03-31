@@ -27,26 +27,27 @@
 
 - 모든 문서, 커밋 메시지는 **한국어**로 작성
 - 명령어와 출력은 **코드블록**으로 기록, 호스트 셸 명령어 앞에 `$ ` 접두사. 컨테이너 내부 명령은 `# ` 접두사로 구분
-- 스크린샷은 `screenshots/` 폴더에 저장, README에서 상대경로로 참조
+- 스크린샷은 `screenshots/` 폴더에 저장, 각 문서에서 상대경로로 참조 (README: `screenshots/`, docs/: `../screenshots/`)
 - 토큰, 비밀번호, 개인키 등 **민감정보는 반드시 마스킹**
 - Docker 실습 후 **컨테이너/볼륨 정리 필수** (이름 충돌, 포트 충돌 방지). 이미지는 이후 Phase에서 재사용하는 경우 유지 (예: `my-web:1.0`은 Phase 5까지 유지)
 - `docs/MISSION.md`는 **절대 수정하지 않는다**
 
 ---
 
-## README 섹션 매핑
+## 기술 문서 매핑
 
-각 Phase의 결과를 README.md의 올바른 섹션에 기록한다.
+각 Phase의 결과를 해당 기술 문서에 기록한다. README.md는 개요와 링크 허브 역할을 한다.
 
-| Phase | README 섹션 |
+| Phase | 기록 위치 |
 |---|---|
-| Phase 1 | §4. 터미널 조작 로그 |
-| Phase 2 | §5. 권한 실습 |
-| Phase 3 | §6. Docker 설치 및 기본 점검, §7. Docker 기본 운영, §8. 컨테이너 실행 실습 |
-| Phase 4 | §9. Dockerfile 커스텀 이미지 |
-| Phase 5 | §10. 포트 매핑 접속 증거, §11. 바인드 마운트 및 볼륨 영속성 |
-| Phase 1~5 (수시) | §13. 트러블슈팅 — **문제 발생 시 즉시 기록** (Phase 6까지 미루지 않는다) |
-| Phase 6 | §1. 프로젝트 개요, §3. 수행 항목 체크리스트, §13. 트러블슈팅 보완 |
+| Phase 1 | `docs/terminal-and-permissions.md` 터미널 조작 로그 |
+| Phase 2 | `docs/terminal-and-permissions.md` 권한 실습 |
+| Phase 3 | `docs/docker-basics.md` |
+| Phase 4 | `docs/docker-custom-image.md` |
+| Phase 5 | `docs/port-mapping-and-storage.md` |
+| Phase 7 (보너스) | `docs/git-setup.md` SSH 키 설정 |
+| Phase 1~5 (수시) | README §5. 트러블슈팅 — **문제 발생 시 즉시 기록** (Phase 6까지 미루지 않는다) |
+| Phase 6 | README §1, §3, §4, §5 |
 
 ---
 
@@ -54,13 +55,18 @@
 
 ```
 E1-1/
-├── app/index.html          # Phase 4에서 생성
-├── Dockerfile               # Phase 4에서 생성
-├── practice/                # Phase 1~2 실습용 임시 디렉토리 (Phase 2 완료 후 삭제)
-├── README.md                # 모든 증거의 중심 문서
-├── screenshots/             # 스크린샷 증거
-├── docs/MISSION.md          # 읽기 전용
-├── docs/ROADMAP.md          # 수정 가능 (체크리스트, 내용 보완)
+├── app/index.html                       # Phase 4에서 생성
+├── Dockerfile                            # Phase 4에서 생성
+├── README.md                             # 개요, 환경, 체크리스트, 링크 허브
+├── screenshots/                          # 스크린샷 증거
+├── docs/
+│   ├── MISSION.md                        # 읽기 전용
+│   ├── ROADMAP.md                        # 수정 가능 (체크리스트, 내용 보완)
+│   ├── terminal-and-permissions.md       # Phase 1-2 실습 로그
+│   ├── docker-basics.md                  # Phase 3 Docker 기초
+│   ├── docker-custom-image.md            # Phase 4 커스텀 이미지
+│   ├── port-mapping-and-storage.md       # Phase 5 포트/스토리지
+│   └── git-setup.md                      # Git 설정 및 GitHub 연동
 ├── .gitignore
 └── CLAUDE.md
 ```
@@ -83,45 +89,45 @@ E1-1/
 ### Phase 1: 터미널 기본 조작
 - ROADMAP.md "Phase 1" 섹션의 명령어를 프로젝트 디렉토리에서 실행
 - `practice/` 디렉토리에서 실습, 완료 후 임시 파일 정리
-- 모든 명령+출력을 README §4에 코드블록으로 기록
-- 오류/예상과 다른 동작 발생 시 README §13에 즉시 기록
+- 모든 명령+출력을 `docs/terminal-and-permissions.md`에 코드블록으로 기록
+- 오류/예상과 다른 동작 발생 시 README §5에 즉시 기록
 
 ### Phase 2: 파일 권한 실습
 - 파일 1개 + 디렉토리 1개에 대해 권한 변경 실험
 - `ls -l` / `ls -ld` 출력으로 변경 전/후 비교 기록
 - 권한 숫자(644, 755, 700)의 의미를 간단히 설명 포함
 - 실습 완료 후 `practice/` 디렉토리 전체 삭제 (`rm -r practice/`)
-- 오류/예상과 다른 동작 발생 시 README §13에 즉시 기록
+- 오류/예상과 다른 동작 발생 시 README §5에 즉시 기록
 
 ### Phase 3: Docker 설치 및 기본 점검
 - `docker info` 출력은 주요 항목만 기록 (전체 출력 불필요)
 - `docker stats --no-stream`으로 스냅샷 캡처 (스트리밍 방지)
-- 결과를 README §6, §7, §8 세 섹션에 분리 기록
+- 결과를 `docs/docker-basics.md`에 섹션별로 분리 기록
 - attach와 exec 차이점을 한국어로 간단 정리
 - 실습 컨테이너는 단계별로 `docker rm -f`로 정리
-- 오류/예상과 다른 동작 발생 시 README §13에 즉시 기록
+- 오류/예상과 다른 동작 발생 시 README §5에 즉시 기록
 
 ### Phase 4: Dockerfile 커스텀 이미지 제작
 - `app/index.html` 생성 (한국어 콘텐츠)
 - 프로젝트 루트에 `Dockerfile` 생성 (nginx:alpine 기반)
 - LABEL, ENV, COPY, EXPOSE, HEALTHCHECK 포함
-- 베이스 이미지 선택 이유와 각 커스텀 포인트 목적을 README §9에 설명
+- 베이스 이미지 선택 이유와 각 커스텀 포인트 목적을 `docs/docker-custom-image.md`에 설명
 - 빌드한 이미지(`my-web:1.0`)는 Phase 5에서 사용하므로 **삭제하지 않는다**
-- 오류/예상과 다른 동작 발생 시 README §13에 즉시 기록
+- 오류/예상과 다른 동작 발생 시 README §5에 즉시 기록
 
 ### Phase 5: 포트 매핑 및 스토리지
 - 8080, 8081 두 포트로 동시 실행
 - **브라우저 스크린샷은 사용자가 직접 캡처** → 명확히 안내하고 대기
 - 바인드 마운트: curl 변경 전/후 비교 기록, 원본 복원 잊지 않기
 - 볼륨: 생성 → 쓰기 → 컨테이너 삭제 → 새 컨테이너에서 읽기 패턴
-- 오류/예상과 다른 동작 발생 시 README §13에 즉시 기록
+- 오류/예상과 다른 동작 발생 시 README §5에 즉시 기록
 
 ### Phase 6: 문서 마무리 및 보안 검토
-- §1 프로젝트 개요 작성
-- §3 수행 항목 체크리스트 완성 (전 항목 체크)
-- §13 트러블슈팅 최소 2건 확보 확인 및 보완
+- README §1 프로젝트 개요 확인
+- README §3 수행 항목 체크리스트 완성 (전 항목 체크)
+- README §5 트러블슈팅 최소 2건 확보 확인 및 보완
 - 모든 스크린샷/로그에서 민감정보 마스킹 최종 점검
-- §12의 `git config --list`에 남아있는 HTTPS URL → 현재 SSH URL로 업데이트 확인
+- `docs/git-setup.md`의 `git config --list`에 남아있는 HTTPS URL → 현재 SSH URL로 업데이트 확인
 - 최종 커밋 및 푸시
 
 ---
@@ -131,4 +137,4 @@ E1-1/
 - 사용자 행동이 필요한 경우 (스크린샷 캡처 등) 명확히 안내하고 대기
 - Docker 명령 실패 시 (포트 충돌, 이름 충돌 등) 정리 후 재시도
 - Phase 완료 후 README 변경 내용을 사용자에게 확인받고 커밋 진행
-- 트러블슈팅 발생 시 즉시 README §13에 기록 — Phase 6까지 미루지 않는다
+- 트러블슈팅 발생 시 즉시 README §5에 기록 — Phase 6까지 미루지 않는다
