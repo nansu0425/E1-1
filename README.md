@@ -112,6 +112,54 @@ drwxrwxr-x 8 nansu0425 nansu0425 4096 Mar 31 15:22 ..
 -rw-rw-r-- 1 nansu0425 nansu0425   17 Mar 31 15:23 hello.txt
 ```
 ## 5. 권한 실습
+
+### 파일 권한 변경
+
+**변경 전:**
+
+```bash
+$ echo "permission test" > practice/perm_test.txt
+$ ls -l practice/perm_test.txt
+-rw-rw-r-- 1 nansu0425 nansu0425 16 Mar 31 15:31 practice/perm_test.txt
+```
+
+**변경 후 (chmod 755):**
+
+```bash
+$ chmod 755 practice/perm_test.txt
+$ ls -l practice/perm_test.txt
+-rwxr-xr-x 1 nansu0425 nansu0425 16 Mar 31 15:31 practice/perm_test.txt
+```
+
+### 디렉토리 권한 변경
+
+**변경 전:**
+
+```bash
+$ mkdir practice/perm_dir
+$ ls -ld practice/perm_dir
+drwxrwxr-x 2 nansu0425 nansu0425 4096 Mar 31 15:32 practice/perm_dir
+```
+
+**변경 후 (chmod 700):**
+
+```bash
+$ chmod 700 practice/perm_dir
+$ ls -ld practice/perm_dir
+drwx------ 2 nansu0425 nansu0425 4096 Mar 31 15:32 practice/perm_dir
+```
+
+### 권한 숫자 설명
+
+| 권한 | 숫자 | 의미 |
+|------|------|------|
+| `rw-rw-r--` | 664 | 소유자/그룹: 읽기+쓰기, 기타: 읽기만 (Ubuntu 기본 파일 권한) |
+| `rwxr-xr-x` | 755 | 소유자: 모든 권한, 그룹/기타: 읽기+실행 (실행 파일, 디렉토리 기본값) |
+| `rwx------` | 700 | 소유자만 모든 권한, 그룹/기타: 접근 불가 (비공개 디렉토리) |
+
+- 각 자리는 읽기(r=4), 쓰기(w=2), 실행(x=1)의 합으로 표현
+- 세 자리 숫자는 순서대로 소유자(owner), 그룹(group), 기타(others)의 권한을 나타냄
+
 ## 6. Docker 설치 및 기본 점검
 ## 7. Docker 기본 운영
 ## 8. 컨테이너 실행 실습
