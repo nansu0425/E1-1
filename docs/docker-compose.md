@@ -197,7 +197,7 @@ server {
 
 ```bash
 # 정적 페이지 응답
-$ wget -qO- http://localhost:8080
+$ curl -s http://localhost:8080
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -212,11 +212,11 @@ $ wget -qO- http://localhost:8080
 </html>
 
 # API 엔드포인트 응답 (1회차)
-$ wget -qO- http://localhost:8080/api/visits
+$ curl -s http://localhost:8080/api/visits
 {"debug":"0","visits":1}
 
 # API 엔드포인트 응답 (2회차 — 카운터 증가 확인)
-$ wget -qO- http://localhost:8080/api/visits
+$ curl -s http://localhost:8080/api/visits
 {"debug":"0","visits":2}
 ```
 
@@ -239,8 +239,8 @@ $ wget -qO- http://localhost:8080/api/visits
 
 ```bash
 # 변경 전 (FLASK_DEBUG=0)
-$ wget -qO- http://localhost:8080/api/visits
-{"debug":"0","visits":2}
+$ curl -s http://localhost:8080/api/visits
+{"debug":"0","visits":3}
 
 # docker-compose.yml에서 FLASK_DEBUG=0 → FLASK_DEBUG=1로 변경 후 재시작
 $ docker compose up -d api
@@ -248,12 +248,15 @@ $ docker compose up -d api
  Container e1-1-api-1  Recreated
 
 # 변경 후 (FLASK_DEBUG=1)
-$ wget -qO- http://localhost:8080/api/visits
-{"debug":"1","visits":3}
+$ curl -s http://localhost:8080/api/visits
+{
+  "debug": "1",
+  "visits": 4
+}
 ```
 
 - `FLASK_DEBUG` 환경 변수를 `0`에서 `1`로 변경하면 API 응답의 `debug` 필드가 변경된다
-- Redis 볼륨(`redis-data`) 덕분에 컨테이너 재생성 후에도 카운터 데이터(visits=3)가 유지된다
+- Redis 볼륨(`redis-data`) 덕분에 컨테이너 재생성 후에도 카운터 데이터(visits=4)가 유지된다
 - 코드 수정 없이 환경 변수만으로 애플리케이션 동작을 제어할 수 있다 — **설정과 코드의 분리**
 
 ---

@@ -27,7 +27,7 @@ Docker Compose version v2.34.0
 
 ```bash
 $ echo '<h1>Updated Content!</h1>' > app/index.html
-$ wget -qO- http://localhost:8082
+$ curl -s http://localhost:8082
 <h1>Updated Content\!</h1>
 ```
 

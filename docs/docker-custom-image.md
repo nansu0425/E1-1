@@ -47,7 +47,7 @@ my-web        1.0       526c448f9a74   62.2MB
 ```bash
 $ docker run -d --name my-web-test -p 8080:80 my-web:1.0
 
-$ wget -qO- http://localhost:8080
+$ curl -s http://localhost:8080
 <!DOCTYPE html>
 <html lang="ko">
 <head>

@@ -21,10 +21,10 @@ a83b0d039e1a   my-web:1.0   "/docker-entrypoint.…"   7 seconds ago   Up 6 seco
 
 `-p 호스트포트:컨테이너포트` 옵션으로 하나의 이미지를 서로 다른 포트에 동시 실행할 수 있다.
 
-### wget 응답 확인
+### curl 응답 확인
 
 ```bash
-$ wget -qO- http://localhost:8080
+$ curl -s http://localhost:8080
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -37,7 +37,7 @@ $ wget -qO- http://localhost:8080
 </body>
 </html>
 
-$ wget -qO- http://localhost:8081
+$ curl -s http://localhost:8081
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -76,7 +76,7 @@ $ docker run -d -p 8082:80 --name bind-test \
 **변경 전:**
 
 ```bash
-$ wget -qO- http://localhost:8082
+$ curl -s http://localhost:8082
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -99,7 +99,7 @@ $ echo '<h1>Updated Content!</h1>' > app/index.html
 **변경 후:**
 
 ```bash
-$ wget -qO- http://localhost:8082
+$ curl -s http://localhost:8082
 <h1>Updated Content\!</h1>
 ```
 

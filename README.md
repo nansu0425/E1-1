@@ -39,7 +39,6 @@ Docker version 28.2.2, build 28.2.2-0ubuntu1~24.04.1
 
 본 프로젝트는 Ubuntu 환경에서 수행되었으나, 대부분의 명령어는 macOS에서도 동일하게 실행할 수 있다. 주요 차이점은 다음과 같다.
 
-- **wget → curl 대체:** macOS에는 `wget`이 기본 설치되어 있지 않으므로 `wget -qO- <URL>` 대신 `curl -s <URL>`을 사용한다.
 - **Docker Desktop:** macOS에서는 Docker Desktop 설치 시 `docker compose`가 자동 포함된다. 별도로 `docker-compose-v2` 패키지를 설치할 필요가 없다.
 - **홈 디렉토리 경로:** `/home/<user>` 대신 `/Users/<user>`를 사용한다.
 
@@ -74,13 +73,13 @@ Docker version 28.2.2, build 28.2.2-0ubuntu1~24.04.1
 | hello-world 실행 | [Docker 기초](docs/docker-basics.md#hello-world-실행) | docker run hello-world 출력 |
 | ubuntu 컨테이너 | [Docker 기초](docs/docker-basics.md#ubuntu-컨테이너-실행) | docker run -it ubuntu bash 내부 명령 |
 | attach/exec 차이 | [Docker 기초](docs/docker-basics.md#attach와-exec-차이) | attach exit→종료, exec exit→유지 비교 |
-| Dockerfile 커스텀 이미지 | [커스텀 이미지](docs/docker-custom-image.md) | docker build + wget 응답 확인 |
-| 포트 매핑 접속 | [포트 매핑 및 스토리지](docs/port-mapping-and-storage.md#포트-매핑-접속-증거) | 8080/8081 wget 응답 + 브라우저 스크린샷 |
-| 바인드 마운트 | [포트 매핑 및 스토리지](docs/port-mapping-and-storage.md#바인드-마운트) | 호스트 파일 변경 전/후 wget 비교 |
+| Dockerfile 커스텀 이미지 | [커스텀 이미지](docs/docker-custom-image.md) | docker build + curl 응답 확인 |
+| 포트 매핑 접속 | [포트 매핑 및 스토리지](docs/port-mapping-and-storage.md#포트-매핑-접속-증거) | 8080/8081 curl 응답 + 브라우저 스크린샷 |
+| 바인드 마운트 | [포트 매핑 및 스토리지](docs/port-mapping-and-storage.md#바인드-마운트) | 호스트 파일 변경 전/후 curl 비교 |
 | 볼륨 영속성 | [포트 매핑 및 스토리지](docs/port-mapping-and-storage.md#볼륨-영속성) | 컨테이너 삭제 후 새 컨테이너에서 데이터 읽기 |
 | Git 설정 + GitHub 연동 | [Git 설정 및 GitHub 연동](docs/git-setup.md) | git config --list + SSH 인증 |
 | 보안 검토 | 전체 문서 | 민감정보 마스킹 확인 |
-| Docker Compose 멀티 컨테이너 | [Docker Compose 실습](docs/docker-compose.md) | 3서비스 실행 + wget 응답 확인 |
+| Docker Compose 멀티 컨테이너 | [Docker Compose 실습](docs/docker-compose.md) | 3서비스 실행 + curl 응답 확인 |
 | 환경 변수 활용 | [Docker Compose 실습](docs/docker-compose.md#4-환경-변수-활용) | FLASK_DEBUG 변경 전/후 비교 |
 | GitHub SSH 키 설정 | [Git 설정 및 GitHub 연동](docs/git-setup.md#github-ssh-키-설정-보너스) | SSH 인증 테스트 |
 
