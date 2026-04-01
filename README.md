@@ -39,7 +39,7 @@ Docker version 28.2.2, build 28.2.2-0ubuntu1~24.04.1
 
 본 프로젝트는 Ubuntu 환경에서 수행되었으나, 대부분의 명령어는 macOS에서도 동일하게 실행할 수 있다. 주요 차이점은 다음과 같다.
 
-- **Docker Desktop:** macOS에서는 Docker Desktop 설치 시 `docker compose`가 자동 포함된다. 별도로 `docker-compose-v2` 패키지를 설치할 필요가 없다.
+- **Docker 환경:** macOS에서는 Docker Desktop 또는 OrbStack 설치 시 `docker compose`가 자동 포함된다. 별도로 `docker-compose-v2` 패키지를 설치할 필요가 없다.
 - **홈 디렉토리 경로:** `/home/<user>` 대신 `/Users/<user>`를 사용한다.
 
 ## 3. 수행 항목 체크리스트
